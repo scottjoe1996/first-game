@@ -5,11 +5,11 @@ public class CameraControl : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
     // public Transform player;
-    public Camera Camera;
+    public CameraRotation CameraRotation;
     public IUnityService _unityService;
 
     [Inject]
-    public void Construct(IUnityService unityService) 
+    public void Construct(IUnityService unityService)
     {
         _unityService = unityService;
     }
@@ -18,12 +18,12 @@ public class CameraControl : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Camera = new Camera(mouseSensitivity);
+        CameraRotation = new CameraRotation(mouseSensitivity);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.localRotation = Camera.CalculateXRotation(_unityService.GetAxis("Mouse Y"), _unityService.GetDeltaTime());
+        transform.localRotation = CameraRotation.CalculateXRotation(_unityService.GetAxis("Mouse Y"), _unityService.GetDeltaTime());
     }
 }

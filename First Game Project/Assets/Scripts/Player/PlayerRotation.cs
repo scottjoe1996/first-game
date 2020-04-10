@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class Player
+public class PlayerRotation
 {
     public float MouseSensitivity;
 
-    public Player(float mouseSensitivity)
+    public PlayerRotation(float mouseSensitivity)
     {
         MouseSensitivity = mouseSensitivity;
     }

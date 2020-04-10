@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Camera {
+public class CameraRotation {
     public float MouseSensitivity;
     private float xRotation = 0f;
 
-    public Camera(float mouseSensitivity) {
+    public CameraRotation(float mouseSensitivity) {
         MouseSensitivity = mouseSensitivity;
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using NSubstitute;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -8,21 +9,18 @@ namespace Tests
 {
     public class CameraControlTests
     {
-        // A Test behaves as an ordinary method
-        [Test]
-        public void NewTestScriptSimplePasses()
-        {
-            // Use the Assert class to test conditions
-        }
-
-        // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-        // `yield return null;` to skip a frame.
         [UnityTest]
-        public IEnumerator NewTestScriptWithEnumeratorPasses()
+        public IEnumerator UpdateShouldRotateCameraAroundTheXAxisWhenMouseMovesAlongTheYAxis()
         {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
+            var camera = new GameObject().AddComponent<CameraControl>();
+            var unityService = Substitute.For<IUnityService>();
+            unityService.GetAxis("Mouse Y").Returns(1);
+            unityService.GetDeltaTime().Returns(1);
+
+            camera._unityService = unityService;
             yield return null;
+
+            Assert.AreEqual(-0.7, camera.transform.rotation.x, 0.1f);
         }
     }
 }

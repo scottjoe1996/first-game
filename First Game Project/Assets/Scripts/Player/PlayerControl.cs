@@ -4,7 +4,7 @@ using Zenject;
 public class PlayerControl : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
-    public Player Player;
+    public PlayerRotation PlayerRotation;
     public IUnityService _unityService;
 
     [Inject]
@@ -16,12 +16,12 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = new Player(mouseSensitivity);
+        PlayerRotation = new PlayerRotation(mouseSensitivity);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Player.CalculateYRotation(_unityService.GetAxis("Mouse X"), _unityService.GetDeltaTime()));
+        transform.Rotate(PlayerRotation.CalculateYRotation(_unityService.GetAxis("Mouse X"), _unityService.GetDeltaTime()));
     }
 }

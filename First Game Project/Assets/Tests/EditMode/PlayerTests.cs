@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 namespace Tests
 {
     public class PlayerTests
     {
-        // A Test behaves as an ordinary method
         [Test]
-        public void shouldReturnExpectedRotation()
+        public void CalculateYRotationShouldReturnExpectedRotation()
         {
             float mouseX = 10f;
             float deltaTime = 10f;

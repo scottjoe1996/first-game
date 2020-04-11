@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement
 {
-    readonly Transform Player;
+    readonly Transform PlayerTransform;
     readonly float Speed;
 
-    public PlayerMovement(Transform player, float speed)
+    public PlayerMovement(Transform playerTransform, float speed)
     {
-        Player = player;
+        PlayerTransform = playerTransform;
         Speed = speed;
     }
 
     public Vector3 Calculate(float xMovement, float zMovement, float deltaTime)
     {
-        Vector3 movement = (Player.right * xMovement + Player.forward * zMovement) * deltaTime * Speed;
+        Vector3 movement = (PlayerTransform.right * xMovement + PlayerTransform.forward * zMovement) * deltaTime * Speed;
 
         return movement;
     }

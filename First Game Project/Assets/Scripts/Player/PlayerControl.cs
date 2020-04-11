@@ -3,12 +3,12 @@ using Zenject;
 
 public class PlayerControl : MonoBehaviour
 {
+    public CharacterController characterController;
+
     public PlayerRotation PlayerRotation;
     public PlayerMovement PlayerMovement;
 
     public IUnityService _unityService;
-
-    public CharacterController characterController;
 
     public float mouseSensitivity = 100f;
     public float speed = 12f;

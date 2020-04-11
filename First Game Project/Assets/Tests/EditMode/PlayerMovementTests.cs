@@ -6,7 +6,7 @@ namespace Tests
     public class PlayerMovementTests
     {
         [Test]
-        public void PlayerMovementTestsSimplePasses()
+        public void CalculateShouldReturnExpectedVector3()
         {
             var player = new GameObject().AddComponent<PlayerControl>();
             PlayerMovement playerMovement = new PlayerMovement(player.transform, 12f);

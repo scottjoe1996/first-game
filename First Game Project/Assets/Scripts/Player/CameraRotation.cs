@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class CameraRotation {
+public class CameraRotation 
+{
     public float MouseSensitivity;
     private float xRotation = 0f;
 

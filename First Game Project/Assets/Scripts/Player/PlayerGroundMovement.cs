@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement
+public class PlayerGroundMovement
 {
     readonly Transform PlayerTransform;
     readonly float Speed;
 
-    public PlayerMovement(Transform playerTransform, float speed)
+    public PlayerGroundMovement(Transform playerTransform, float speed)
     {
         PlayerTransform = playerTransform;
         Speed = speed;

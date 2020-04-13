@@ -12,52 +12,72 @@ namespace Tests
         [UnityTest]
         public IEnumerator UpdateShouldRotatePlayerAroundTheYAxisWhenMouseMovesAlongTheXAxis()
         {
-            var player = new GameObject().AddComponent<PlayerControl>();
-            var characterController = new GameObject().AddComponent<CharacterController>();
+            PlayerControl player = new GameObject().AddComponent<PlayerControl>();
+            CharacterController characterController = new GameObject().AddComponent<CharacterController>();
 
-            var unityService = Substitute.For<IUnityService>();
+            IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Mouse X").Returns(1);
             unityService.GetDeltaTime().Returns(1);
 
             player._unityService = unityService;
             player.characterController = characterController;
-            yield return null;
 
+            Assert.AreEqual(0, player.transform.rotation.y);
+            yield return null;
             Assert.AreEqual(0.8, player.transform.rotation.y, 0.1f);
         }
 
         [UnityTest]
         public IEnumerator UpdateShouldMovePlayerAlongZForVerticalInput()
         {
-            var player = new GameObject().AddComponent<PlayerControl>();
-            var characterController = new GameObject().AddComponent<CharacterController>();
+            PlayerControl player = new GameObject().AddComponent<PlayerControl>();
+            CharacterController characterController = new GameObject().AddComponent<CharacterController>();
 
-            var unityService = Substitute.For<IUnityService>();
+            IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Vertical").Returns(1);
             unityService.GetDeltaTime().Returns(1);
 
             player._unityService = unityService;
             player.characterController = characterController;
-            yield return null;
 
-            Assert.AreEqual(12f, characterController.transform.position.z, 0.1f);
+            Assert.AreEqual(0f, characterController.transform.position.z);
+            yield return null;
+            Assert.AreEqual(12f, characterController.transform.position.z);
         }
 
         [UnityTest]
         public IEnumerator UpdateShouldMovePlayerAlongXForHorizontalInput()
         {
-            var player = new GameObject().AddComponent<PlayerControl>();
-            var characterController = new GameObject().AddComponent<CharacterController>();
+            PlayerControl player = new GameObject().AddComponent<PlayerControl>();
+            CharacterController characterController = new GameObject().AddComponent<CharacterController>();
 
-            var unityService = Substitute.For<IUnityService>();
+            IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Horizontal").Returns(1);
             unityService.GetDeltaTime().Returns(1);
 
             player._unityService = unityService;
             player.characterController = characterController;
-            yield return null;
 
-            Assert.AreEqual(12f, characterController.transform.position.x, 0.1f);
+            Assert.AreEqual(0, characterController.transform.position.x);
+            yield return null;
+            Assert.AreEqual(12f, characterController.transform.position.x);
+        }
+
+        [UnityTest]
+        public IEnumerator UpdateShouldApplyGrowingGravitationForceVectorOnPlayerWhenFalling()
+        {
+            PlayerControl player = new GameObject().AddComponent<PlayerControl>();
+            CharacterController characterController = new GameObject().AddComponent<CharacterController>();
+
+            IUnityService unityService = Substitute.For<IUnityService>();
+            unityService.GetDeltaTime().Returns(1);
+
+            player._unityService = unityService;
+            player.characterController = characterController;
+            yield return null;
+            Assert.AreEqual(-14f, characterController.transform.position.y);
+            yield return null;
+            Assert.AreEqual(-42f, characterController.transform.position.y);
         }
     }
 }

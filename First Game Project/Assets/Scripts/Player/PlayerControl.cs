@@ -33,7 +33,9 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         transform.Rotate(PlayerRotation.CalculateYRotation(_unityService.GetAxis("Mouse X"), _unityService.GetDeltaTime()));
+
         characterController.Move(PlayerGroundMovement.Calculate(_unityService.GetAxis("Horizontal"), _unityService.GetAxis("Vertical"), _unityService.GetDeltaTime()));
+
         characterController.Move(PlayerVerticalMovement.CalculateGravitationalEffectVector(_unityService.GetDeltaTime()));
     }
 }

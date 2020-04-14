@@ -61,9 +61,9 @@ namespace Tests
             player._unityService = unityService;
             player.characterController = characterController;
 
-            Assert.AreEqual(0, characterController.transform.position.x);
+            Assert.AreEqual(0, playerGameObject.transform.position.x);
             yield return null;
-            Assert.AreEqual(12f, characterController.transform.position.x);
+            Assert.AreEqual(12f, playerGameObject.transform.position.x);
         }
 
         [UnityTest]
@@ -79,9 +79,11 @@ namespace Tests
             player._unityService = unityService;
             player.characterController = characterController;
             yield return null;
-            Assert.AreEqual(-14f, characterController.transform.position.y);
+            Assert.AreEqual(-14f, playerGameObject.transform.position.y);
             yield return null;
-            Assert.AreEqual(-42f, characterController.transform.position.y);
+            Assert.AreEqual(-42f, playerGameObject.transform.position.y);
         }
     }
+
+
 }

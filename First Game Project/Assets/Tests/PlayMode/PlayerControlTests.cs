@@ -12,8 +12,9 @@ namespace Tests
         [UnityTest]
         public IEnumerator UpdateShouldRotatePlayerAroundTheYAxisWhenMouseMovesAlongTheXAxis()
         {
-            PlayerControl player = new GameObject().AddComponent<PlayerControl>();
-            CharacterController characterController = new GameObject().AddComponent<CharacterController>();
+            GameObject playerGameObject = new GameObject("Player");
+            PlayerControl player = playerGameObject.AddComponent<PlayerControl>();
+            CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
             IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Mouse X").Returns(1);
@@ -22,16 +23,17 @@ namespace Tests
             player._unityService = unityService;
             player.characterController = characterController;
 
-            Assert.AreEqual(0, player.transform.rotation.y);
+            Assert.AreEqual(0, playerGameObject.transform.rotation.y);
             yield return null;
-            Assert.AreEqual(0.8, player.transform.rotation.y, 0.1f);
+            Assert.AreEqual(0.8, playerGameObject.transform.rotation.y, 0.1f);
         }
 
         [UnityTest]
         public IEnumerator UpdateShouldMovePlayerAlongZForVerticalInput()
         {
-            PlayerControl player = new GameObject().AddComponent<PlayerControl>();
-            CharacterController characterController = new GameObject().AddComponent<CharacterController>();
+            GameObject playerGameObject = new GameObject("Player");
+            PlayerControl player = playerGameObject.AddComponent<PlayerControl>();
+            CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
             IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Vertical").Returns(1);
@@ -40,16 +42,17 @@ namespace Tests
             player._unityService = unityService;
             player.characterController = characterController;
 
-            Assert.AreEqual(0f, characterController.transform.position.z);
+            Assert.AreEqual(0f, playerGameObject.transform.position.z);
             yield return null;
-            Assert.AreEqual(12f, characterController.transform.position.z);
+            Assert.AreEqual(12f, playerGameObject.transform.position.z);
         }
 
         [UnityTest]
         public IEnumerator UpdateShouldMovePlayerAlongXForHorizontalInput()
         {
-            PlayerControl player = new GameObject().AddComponent<PlayerControl>();
-            CharacterController characterController = new GameObject().AddComponent<CharacterController>();
+            GameObject playerGameObject = new GameObject("Player");
+            PlayerControl player = playerGameObject.AddComponent<PlayerControl>();
+            CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
             IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Horizontal").Returns(1);
@@ -66,8 +69,9 @@ namespace Tests
         [UnityTest]
         public IEnumerator UpdateShouldApplyGrowingGravitationForceVectorOnPlayerWhenFalling()
         {
-            PlayerControl player = new GameObject().AddComponent<PlayerControl>();
-            CharacterController characterController = new GameObject().AddComponent<CharacterController>();
+            GameObject playerGameObject = new GameObject("Player");
+            PlayerControl player = playerGameObject.AddComponent<PlayerControl>();
+            CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
             IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetDeltaTime().Returns(1);

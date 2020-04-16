@@ -1,11 +1,4 @@
-using UnityEngine;
-
-public interface IUnityService 
-{
-    float GetDeltaTime();
-    float GetAxis(string axisName);
-    
-}
+﻿using UnityEngine;
 
 public class UnityService : IUnityService 
 {

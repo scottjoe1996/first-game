@@ -8,7 +8,7 @@ namespace Tests
         [Test]
         public void CalculateShouldReturnExpectedVector3()
         {
-            var player = new GameObject().AddComponent<PlayerControl>();
+            var player = new GameObject().AddComponent<PlayerController>();
             PlayerGroundMovement playerGroundMovement = new PlayerGroundMovement(player.transform, 12f);
 
             Vector3 expected = new Vector3(12f, 0f, 12f);

@@ -6,21 +6,21 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class PlayerControlTests
+    public class PlayerControllerTests
     {
         [UnityTest]
         public IEnumerator UpdateShouldRotatePlayerAroundTheYAxisWhenMouseMovesAlongTheXAxis()
         {
             GameObject playerGameObject = new GameObject("Player");
-            PlayerControl player = playerGameObject.AddComponent<PlayerControl>();
+            PlayerController playerController = playerGameObject.AddComponent<PlayerController>();
             CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
             IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Mouse X").Returns(1);
             unityService.GetDeltaTime().Returns(1);
 
-            player._unityService = unityService;
-            player.characterController = characterController;
+            playerController._unityService = unityService;
+            playerController.characterController = characterController;
 
             Assert.AreEqual(0, playerGameObject.transform.rotation.y);
             yield return null;
@@ -31,15 +31,15 @@ namespace Tests
         public IEnumerator UpdateShouldMovePlayerAlongZForVerticalInput()
         {
             GameObject playerGameObject = new GameObject("Player");
-            PlayerControl player = playerGameObject.AddComponent<PlayerControl>();
+            PlayerController playerController = playerGameObject.AddComponent<PlayerController>();
             CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
             IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Vertical").Returns(1);
             unityService.GetDeltaTime().Returns(1);
 
-            player._unityService = unityService;
-            player.characterController = characterController;
+            playerController._unityService = unityService;
+            playerController.characterController = characterController;
 
             Assert.AreEqual(0f, playerGameObject.transform.position.z);
             yield return null;
@@ -50,15 +50,15 @@ namespace Tests
         public IEnumerator UpdateShouldMovePlayerAlongXForHorizontalInput()
         {
             GameObject playerGameObject = new GameObject("Player");
-            PlayerControl player = playerGameObject.AddComponent<PlayerControl>();
+            PlayerController playerController = playerGameObject.AddComponent<PlayerController>();
             CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
             IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetAxis("Horizontal").Returns(1);
             unityService.GetDeltaTime().Returns(1);
 
-            player._unityService = unityService;
-            player.characterController = characterController;
+            playerController._unityService = unityService;
+            playerController.characterController = characterController;
 
             Assert.AreEqual(0, playerGameObject.transform.position.x);
             yield return null;
@@ -69,14 +69,14 @@ namespace Tests
         public IEnumerator UpdateShouldApplyGrowingGravitationForceVectorOnPlayerWhenFalling()
         {
             GameObject playerGameObject = new GameObject("Player");
-            PlayerControl player = playerGameObject.AddComponent<PlayerControl>();
+            PlayerController playerController = playerGameObject.AddComponent<PlayerController>();
             CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
             IUnityService unityService = Substitute.For<IUnityService>();
             unityService.GetDeltaTime().Returns(1);
 
-            player._unityService = unityService;
-            player.characterController = characterController;
+            playerController._unityService = unityService;
+            playerController.characterController = characterController;
             yield return null;
             Assert.AreEqual(-14f, playerGameObject.transform.position.y);
             yield return null;

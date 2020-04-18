@@ -11,9 +11,9 @@ namespace Tests
         {
             var characterController = new GameObject().AddComponent<CharacterController>();
             GroundChecker GroundChecker = new GroundChecker(characterController);
-            var physicsSerice = Substitute.For<IPhysicsService>();
-            physicsSerice.SphereCast(default, default, default).ReturnsForAnyArgs(true);
-            GroundChecker._physicsService = physicsSerice;
+            var checkGround = Substitute.For<ICheckGround>();
+            checkGround.SphereCast(default, default, default).ReturnsForAnyArgs(true);
+            GroundChecker._checkGround = checkGround;
 
             Assert.IsTrue(GroundChecker.IsGrounded());
         }
@@ -23,9 +23,9 @@ namespace Tests
         {
             var characterController = new GameObject().AddComponent<CharacterController>();
             GroundChecker GroundChecker = new GroundChecker(characterController);
-            var physicsSerice = Substitute.For<IPhysicsService>();
-            physicsSerice.SphereCast(default, default, default).ReturnsForAnyArgs(false);
-            GroundChecker._physicsService = physicsSerice;
+            var checkGround = Substitute.For<ICheckGround>();
+            checkGround.SphereCast(default, default, default).ReturnsForAnyArgs(false);
+            GroundChecker._checkGround = checkGround;
 
             Assert.IsFalse(GroundChecker.IsGrounded());
         }

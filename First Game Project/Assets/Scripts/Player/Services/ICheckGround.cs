@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IPhysicsService
+public interface ICheckGround
 {
     bool SphereCast(Ray ray, float radius, float maxDistance);
 }

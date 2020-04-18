@@ -5,8 +5,12 @@ public class PlayerInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.Bind<IUnityService>()
-                .To<UnityService>()
+        Container.Bind<IPlayerMovementInput>()
+                .To<PlayerMovementInput>()
+                .AsSingle();
+
+        Container.Bind<IPlayerAttackInput>()
+                .To<PlayerAttackInput>()
                 .AsSingle();
     }
 }

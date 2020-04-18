@@ -15,11 +15,11 @@ namespace Tests
             GameObject cameraGameObject = new GameObject("Camera");
             CameraController cameraController = cameraGameObject.AddComponent<CameraController>();
 
-            IUnityService unityService = Substitute.For<IUnityService>();
-            unityService.GetAxis("Mouse Y").Returns(1);
-            unityService.GetDeltaTime().Returns(1);
+            IPlayerMovementInput playerInput = Substitute.For<IPlayerMovementInput>();
+            playerInput.GetAxis("Mouse Y").Returns(1);
+            playerInput.GetDeltaTime().Returns(1);
 
-            cameraController._unityService = unityService;
+            cameraController._playerInput = playerInput;
 
             Assert.AreEqual(0, cameraController.transform.rotation.x, 0.1f);
             yield return null;

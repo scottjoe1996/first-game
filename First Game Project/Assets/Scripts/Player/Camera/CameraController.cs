@@ -5,12 +5,12 @@ public class CameraController : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
     public CameraRotation CameraRotation;
-    public IUnityService _unityService;
+    public IPlayerMovementInput _playerInput;
 
     [Inject]
-    public void Construct(IUnityService unityService)
+    public void Construct(IPlayerMovementInput playerInput)
     {
-        _unityService = unityService;
+        _playerInput = playerInput;
     }
 
     void Start()
@@ -21,6 +21,6 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        transform.localRotation = CameraRotation.CalculateXRotation(_unityService.GetAxis("Mouse Y"), _unityService.GetDeltaTime());
+        transform.localRotation = CameraRotation.CalculateXRotation(_playerInput.GetAxis("Mouse Y"), _playerInput.GetDeltaTime());
     }
 }

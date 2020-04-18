@@ -9,16 +9,16 @@ public class PlayerController : MonoBehaviour
     public PlayerGroundMovement PlayerGroundMovement;
     public PlayerVerticalMovement PlayerVerticalMovement;
 
-    public IUnityService _unityService;
+    public IPlayerMovementInput _playerMovementInput;
 
     public float mouseSensitivity = 100f;
     public float speed = 12f;
     public float gravity = -14f;
 
     [Inject]
-    public void Construct(IUnityService unityService)
+    public void Construct(IPlayerMovementInput playerMovementInput)
     {
-        _unityService = unityService;
+        _playerMovementInput = playerMovementInput;
     }
     
     void Start()
@@ -30,10 +30,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(PlayerRotation.CalculateYRotation(_unityService.GetAxis("Mouse X"), _unityService.GetDeltaTime()));
+        transform.Rotate(PlayerRotation.CalculateYRotation(_playerMovementInput.GetAxis("Mouse X"), _playerMovementInput.GetDeltaTime()));
 
-        characterController.Move(PlayerGroundMovement.Calculate(_unityService.GetAxis("Horizontal"), _unityService.GetAxis("Vertical"), _unityService.GetDeltaTime()));
+        characterController.Move(PlayerGroundMovement.Calculate(_playerMovementInput.GetAxis("Horizontal"), _playerMovementInput.GetAxis("Vertical"), _playerMovementInput.GetDeltaTime()));
 
-        characterController.Move(PlayerVerticalMovement.CalculateGravitationalEffectVector(_unityService.GetDeltaTime()));
+        characterController.Move(PlayerVerticalMovement.CalculateGravitationalEffectVector(_playerMovementInput.GetDeltaTime()));
     }
 }

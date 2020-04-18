@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class UnityService : IUnityService 
+public class PlayerMovementInput : IPlayerMovementInput 
 {
     public float GetDeltaTime() 
     {

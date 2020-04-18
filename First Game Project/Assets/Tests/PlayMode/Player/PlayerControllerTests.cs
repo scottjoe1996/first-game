@@ -15,11 +15,11 @@ namespace Tests
             PlayerController playerController = playerGameObject.AddComponent<PlayerController>();
             CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
-            IUnityService unityService = Substitute.For<IUnityService>();
-            unityService.GetAxis("Mouse X").Returns(1);
-            unityService.GetDeltaTime().Returns(1);
+            IPlayerMovementInput playerMovementInput = Substitute.For<IPlayerMovementInput>();
+            playerMovementInput.GetAxis("Mouse X").Returns(1);
+            playerMovementInput.GetDeltaTime().Returns(1);
 
-            playerController._unityService = unityService;
+            playerController._playerMovementInput = playerMovementInput;
             playerController.characterController = characterController;
 
             Assert.AreEqual(0, playerGameObject.transform.rotation.y);
@@ -34,11 +34,11 @@ namespace Tests
             PlayerController playerController = playerGameObject.AddComponent<PlayerController>();
             CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
-            IUnityService unityService = Substitute.For<IUnityService>();
-            unityService.GetAxis("Vertical").Returns(1);
-            unityService.GetDeltaTime().Returns(1);
+            IPlayerMovementInput playerMovementInput = Substitute.For<IPlayerMovementInput>();
+            playerMovementInput.GetAxis("Vertical").Returns(1);
+            playerMovementInput.GetDeltaTime().Returns(1);
 
-            playerController._unityService = unityService;
+            playerController._playerMovementInput = playerMovementInput;
             playerController.characterController = characterController;
 
             Assert.AreEqual(0f, playerGameObject.transform.position.z);
@@ -53,11 +53,11 @@ namespace Tests
             PlayerController playerController = playerGameObject.AddComponent<PlayerController>();
             CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
-            IUnityService unityService = Substitute.For<IUnityService>();
-            unityService.GetAxis("Horizontal").Returns(1);
-            unityService.GetDeltaTime().Returns(1);
+            IPlayerMovementInput playerMovementInput = Substitute.For<IPlayerMovementInput>();
+            playerMovementInput.GetAxis("Horizontal").Returns(1);
+            playerMovementInput.GetDeltaTime().Returns(1);
 
-            playerController._unityService = unityService;
+            playerController._playerMovementInput = playerMovementInput;
             playerController.characterController = characterController;
 
             Assert.AreEqual(0, playerGameObject.transform.position.x);
@@ -72,10 +72,10 @@ namespace Tests
             PlayerController playerController = playerGameObject.AddComponent<PlayerController>();
             CharacterController characterController = playerGameObject.AddComponent<CharacterController>();
 
-            IUnityService unityService = Substitute.For<IUnityService>();
-            unityService.GetDeltaTime().Returns(1);
+            IPlayerMovementInput playerMovementInput = Substitute.For<IPlayerMovementInput>();
+            playerMovementInput.GetDeltaTime().Returns(1);
 
-            playerController._unityService = unityService;
+            playerController._playerMovementInput = playerMovementInput;
             playerController.characterController = characterController;
             yield return null;
             Assert.AreEqual(-14f, playerGameObject.transform.position.y);

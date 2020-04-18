@@ -7,7 +7,7 @@ public class WeaponController : MonoBehaviour
 
     public Weapon Weapon;
 
-    IPlayerAttackInput _playerAttackInput;
+    public IPlayerAttackInput _playerAttackInput;
 
     public float weaponDamage = 10f;
     public float weaponRange = 100f;

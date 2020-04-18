@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using NSubstitute;
 using UnityEngine;
@@ -21,9 +20,9 @@ namespace Tests
 
             cameraController._playerInput = playerInput;
 
-            Assert.AreEqual(0, cameraController.transform.rotation.x, 0.1f);
+            Assert.AreEqual(0, cameraGameObject.transform.rotation.x, 0.1f);
             yield return null;
-            Assert.AreEqual(-0.7, cameraController.transform.rotation.x, 0.1f);
+            Assert.AreEqual(-0.7, cameraGameObject.transform.rotation.x, 0.1f);
         }
     }
 }

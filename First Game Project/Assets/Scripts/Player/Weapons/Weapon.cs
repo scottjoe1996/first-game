@@ -5,20 +5,23 @@ public class Weapon
     public Camera Camera;
     public ICheckWeaponHit _checkWeaponHit;
 
-    readonly float WeaponRange;
-    readonly float WeaponDamage;
+    readonly ParticleSystem AttackEffect;
+    readonly float Range;
+    readonly float Damage;
 
-    public Weapon(Camera camera, float weaponRange, float weaponDamage)
+    public Weapon(Camera camera, float range, float damage, ParticleSystem attackEffect)
     {
         Camera = camera;
         _checkWeaponHit = new CheckWeaponHit();
-        WeaponRange = weaponRange;
-        WeaponDamage = weaponDamage;
+        Range = range;
+        Damage = damage;
+        AttackEffect = attackEffect;
     }
 
     public void Attack()
     {
-        if (_checkWeaponHit.RayCast(Camera.transform.position, Camera.transform.forward, out RaycastHit target, WeaponRange))
+        AttackEffect.Play();
+        if (_checkWeaponHit.RayCast(Camera.transform.position, Camera.transform.forward, out RaycastHit target, Range))
         {
             ApplyDamageToTarget(target);
         }
@@ -29,7 +32,7 @@ public class Weapon
         Target targetHit = target.transform.GetComponent<Target>();
         if (targetHit != null)
         {
-            targetHit.TakeDamage(WeaponDamage);
+            targetHit.TakeDamage(Damage);
         }
     }
 }

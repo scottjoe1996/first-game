@@ -4,6 +4,7 @@ using Zenject;
 public class WeaponController : MonoBehaviour
 {
     public Camera Camera;
+    public ParticleSystem WeaponAttackEffect;
 
     public Weapon Weapon;
 
@@ -20,7 +21,7 @@ public class WeaponController : MonoBehaviour
 
     private void Start()
     {
-        Weapon = new Weapon(Camera, weaponRange, weaponDamage);
+        Weapon = new Weapon(Camera, weaponRange, weaponDamage, WeaponAttackEffect);
     }
 
     void Update()

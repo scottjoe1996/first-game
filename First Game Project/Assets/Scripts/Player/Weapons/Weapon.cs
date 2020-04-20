@@ -1,30 +1,35 @@
 ﻿using UnityEngine;
+using Zenject;
 
-public class Weapon
+public class Weapon : MonoBehaviour
 {
-    public Camera Camera;
+    public ParticleSystem AttackEffect;
+    public GameObject HitEffect;
+    public float Range;
+    public float Damage;
+
     public ICheckWeaponHit _checkWeaponHit;
 
-    readonly ParticleSystem AttackEffect;
-    readonly float Range;
-    readonly float Damage;
-
-    public Weapon(Camera camera, float range, float damage, ParticleSystem attackEffect)
+    [Inject]
+    public void Construct(ICheckWeaponHit checkWeaponHit)
     {
-        Camera = camera;
-        _checkWeaponHit = new CheckWeaponHit();
-        Range = range;
-        Damage = damage;
-        AttackEffect = attackEffect;
+        _checkWeaponHit = checkWeaponHit;
     }
 
-    public void Attack()
+    public void Attack(Camera camera)
     {
         AttackEffect.Play();
-        if (_checkWeaponHit.RayCast(Camera.transform.position, Camera.transform.forward, out RaycastHit target, Range))
+        if (_checkWeaponHit.RayCast(camera.transform.position, camera.transform.forward, out RaycastHit target, Range))
         {
+            CreateHitEffectAtTarget(target);
             ApplyDamageToTarget(target);
         }
+    }
+
+    private void CreateHitEffectAtTarget(RaycastHit target)
+    {
+        GameObject hitEffectGO = Instantiate<GameObject>(HitEffect, target.point, Quaternion.LookRotation(target.normal));
+        Destroy(hitEffectGO, 2f);
     }
 
     private void ApplyDamageToTarget(RaycastHit target)

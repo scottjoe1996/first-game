@@ -4,14 +4,9 @@ using Zenject;
 public class WeaponController : MonoBehaviour
 {
     public Camera Camera;
-    public ParticleSystem WeaponAttackEffect;
-
     public Weapon Weapon;
 
     public IPlayerAttackInput _playerAttackInput;
-
-    public float weaponDamage = 10f;
-    public float weaponRange = 100f;
 
     [Inject]
     public void Construct(IPlayerAttackInput playerAttackInput)
@@ -19,16 +14,11 @@ public class WeaponController : MonoBehaviour
         _playerAttackInput = playerAttackInput;
     }
 
-    private void Start()
-    {
-        Weapon = new Weapon(Camera, weaponRange, weaponDamage, WeaponAttackEffect);
-    }
-
     void Update()
     {
         if (_playerAttackInput.GetButtonDown("Fire1"))
         {
-            Weapon.Attack();
+            Weapon.Attack(Camera);
         }
     }
 }

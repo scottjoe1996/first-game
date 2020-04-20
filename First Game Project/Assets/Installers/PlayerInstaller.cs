@@ -12,5 +12,9 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<IPlayerAttackInput>()
                 .To<PlayerAttackInput>()
                 .AsSingle();
+
+        Container.Bind<ICheckWeaponHit>()
+                .To<CheckWeaponHit>()
+                .AsSingle();
     }
 }

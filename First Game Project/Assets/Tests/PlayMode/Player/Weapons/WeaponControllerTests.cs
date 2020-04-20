@@ -8,7 +8,7 @@ namespace Tests
 {
     public class WeaponControllerTests
     {
-        [UnityTest]
+        /*[UnityTest]
         public IEnumerator ShouldCallWeaponAttackWhenFire1ButtonIsPressed()
         {
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -30,6 +30,6 @@ namespace Tests
             Assert.AreEqual(cube.GetComponent<Target>().health, 50f);
             yield return null;
             Assert.AreEqual(cube.GetComponent<Target>().health, 40f);
-        }
+        }*/
     }
 }

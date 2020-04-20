@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour
 {
     public ParticleSystem AttackEffect;
     public GameObject HitEffect;
+    public LayerMask HitableTargets;
     public float Range;
     public float Damage;
 
@@ -19,7 +20,7 @@ public class Weapon : MonoBehaviour
     public void Attack(Camera camera)
     {
         AttackEffect.Play();
-        if (_checkWeaponHit.RayCast(camera.transform.position, camera.transform.forward, out RaycastHit target, Range))
+        if (_checkWeaponHit.RayCast(camera.transform.position, camera.transform.forward, out RaycastHit target, Range, HitableTargets))
         {
             CreateHitEffectAtTarget(target);
             ApplyDamageToTarget(target);
